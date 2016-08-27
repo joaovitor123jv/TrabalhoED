@@ -4,10 +4,11 @@ void main()
 {
 	int num;
 	int i;
-	int variavel[];
+	int *variavel;
 	int operacao;
 	printf("Digite o numero de operações \n");
 	scanf("%d", &num);
+	variavel = (int *) malloc(sizeof(int) * num);
 	for(i = 0; i<num; i++)
 	{
 		printf("Digite a operação (1 = inserção, 2 = remoção)\n");
@@ -26,5 +27,10 @@ void main()
 		{
 			printf("Operação não suportada\n");
 		}
+	}
+	if(variavel != NULL)
+	{
+		free(variavel);
+		variavel = NULL;
 	}
 }
