@@ -17,5 +17,5 @@
 #define LIMPABUFFER __fpurge(stdin);
 #endif
 
-#define TAMANHO_MAXIMO 500 //tamanho maximo das estruturas
+#define TAMANHO_MAXIMO 10 //tamanho maximo das estruturas
 #define ITEM int // define o tipo de variável das estruturas

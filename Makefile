@@ -1,17 +1,15 @@
 CC=gcc
-FONTE=src/Inicio.c
+FONTE=Inicio.c Pilha.c Fila.c
 EXE=executavel
-PILHA=src/Pilha.c
-#OBJ=$(FONTE:.c=.o) $(PILHA:.c=.o)
-OBJ=Inicio.o Pilha.o
+OBJ=$(FONTE:.c=.o)
 WARNINGS=-Wunused-variable
 INICIO=src/Interface/Inicio.java
 CC_JAVA=javac
 
 all: interface
-	$(CC) -c $(FONTE) $(PILHA)
-	$(CC) -o $(EXE) $(WARNINGS) $(OBJ)
-	rm $(OBJ)
+	cd src; $(CC) -c $(FONTE)
+	cd src; $(CC) -o $(EXE) $(WARNINGS) $(OBJ)
+	cd src; rm $(OBJ)
 
 interface:
 	$(CC_JAVA) $(INICIO)
