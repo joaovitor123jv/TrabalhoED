@@ -19,4 +19,3 @@
 
 #define TAMANHO_MAXIMO 500 //tamanho maximo das estruturas
 #define ITEM int // define o tipo de variável das estruturas
-#include"Pilha.h"

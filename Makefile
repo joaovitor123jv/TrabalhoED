@@ -1,9 +1,11 @@
 CC=gcc
 FONTE=Inicio.c
 EXE=executavel
-OBJ=Inicio.o
+PILHA=Pilha.c
+OBJ=Inicio.o Pilha.o
+WARNINGS=-Wunused-variable
 
 all:
-	$(CC) -c $(FONTE)
-	$(CC) -o $(EXE) $(OBJ)
+	$(CC) -c $(FONTE) $(PILHA)
+	$(CC) -o $(EXE) $(WARNINGS) $(OBJ)
 	rm $(OBJ)
