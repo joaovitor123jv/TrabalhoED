@@ -1,7 +1,7 @@
 CC=gcc
-FONTE=Inicio.c
+FONTE=src/Inicio.c
 EXE=executavel
-PILHA=Pilha.c
+PILHA=src/Pilha.c
 OBJ=Inicio.o Pilha.o
 WARNINGS=-Wunused-variable
 
