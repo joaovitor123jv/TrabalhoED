@@ -12,6 +12,8 @@ void main()
 	int dbg;
 	Pilha* pilha = criaPilha();
 	Fila* fila = criaFila();
+	fila->inicio = 2;
+	fila->fim = 2;
 	system("clear");
 
 	printf("TAMANHO MAXIMO = %d\n", TAMANHO_MAXIMO);
@@ -34,6 +36,7 @@ void main()
 				printf("\t\tEstrutura Cheia Detectada\t[PILHA]\n");
 			}
 			dbg = addFila(variavel[i], fila);
+			printf("\t\t\t\t\t\t\t\t\t\tFIM  %d      INICIO   %d\n\n", fila->fim, fila->inicio);
 			if(dbg == ESTRUTURA_CHEIA)
 			{
 				printf("\t\tEstrutura Cheia Detectada\t[FILA]\n");
@@ -43,10 +46,19 @@ void main()
 		else if(operacao == 2)
 		{
 			printf(" Isso foi uma remoção\n");
-			desempilha(pilha, &variavel[i]);
 			//DEBUGGER
-			printf("pilha->topo == %d\n", pilha->topo);
-			printf("Obtido -> %d\n", variavel[i]);
+			dbg = desempilha( pilha, &variavel[i]);
+			if(dbg == ESTRUTURA_VAZIA)
+			{
+				printf("\t\tEstrutura Cheia Detectada\t[PILHA]\n");
+			}
+			dbg = rmFila(fila, &variavel[i]);
+			printf("\t\t\t\t\t\t\t\t\t\tFIM  %d      INICIO   %d\n\n", fila->fim, fila->inicio);
+			if(dbg == ESTRUTURA_VAZIA)
+			{
+				printf("\t\tEstrutura Cheia Detectada\t[FILA]\n");
+			}
+			printf("empilhado : %d\n", variavel[i]);
 		}
 		else
 		{

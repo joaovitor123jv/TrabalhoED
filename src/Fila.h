@@ -15,3 +15,4 @@ int destroiFila(Fila* fila);
 int filaVazia(Fila* fila);
 int filaCheia(Fila* fila);
 int addFila(ITEM item, Fila* fila);
+int rmFila(Fila* fila, ITEM* item);

@@ -40,7 +40,7 @@ int filaVazia(Fila* fila)
 
 //SEM ERROS ATÉ AQUI
 
-int filaCheia(Fila* fila)
+int filaCheia(Fila* fila) //BUG
 {
 	if(fila == NULL)
 	{
@@ -48,13 +48,13 @@ int filaCheia(Fila* fila)
 	}
 	if(fila->fim > fila->inicio)
 	{
-		if(fila->fim - fila->inicio >= TAMANHO_MAXIMO )
+		if(fila->fim - fila->inicio == TAMANHO_MAXIMO )
 		{
 			return true;
 		}
 		else return false;
 	}
-	else if(TAMANHO_MAXIMO-(fila->inicio - fila->fim) == TAMANHO_MAXIMO -1)
+	else if(fila->fim +1 == fila->inicio && fila->inicio!=0 )
 	{
 		return true;
 	}
@@ -62,7 +62,7 @@ int filaCheia(Fila* fila)
 }
 
 
-int addFila(ITEM item, Fila* fila)
+int addFila(ITEM item, Fila* fila)//BUG
 {
 	if( fila == NULL)
 	{
@@ -73,13 +73,33 @@ int addFila(ITEM item, Fila* fila)
 		return ESTRUTURA_CHEIA;
 	}
 	fila->itens[fila->fim] = item;
-	if( fila->fim+1 > TAMANHO_MAXIMO)
+	if( fila->fim+1 >= TAMANHO_MAXIMO)
 	{
 		fila->fim = 0;
 	}
 	else
 	{
 		fila->fim++;
+	}
+	return OK;
+}
+
+
+int rmFila(Fila* fila, ITEM* item)
+{
+	if(fila == NULL)
+	{
+		return ESTRUTURA_NAO_INICIALIZADA;
+	}
+	if(filaVazia(fila))
+	{
+		return ESTRUTURA_VAZIA;
+	}
+	*item = fila->itens[fila->inicio];
+	fila->inicio++;
+	if(fila->inicio >= TAMANHO_MAXIMO)
+	{
+		fila->inicio = 0;
 	}
 	return OK;
 }
