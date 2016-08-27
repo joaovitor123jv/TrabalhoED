@@ -8,7 +8,7 @@ CC_JAVA=javac
 
 all: interface
 	cd src; $(CC) -c $(FONTE)
-	cd src; $(CC) -o $(EXE) $(WARNINGS) $(OBJ)
+	cd src; $(CC) -o ../$(EXE) $(WARNINGS) $(OBJ)
 	cd src; rm $(OBJ)
 
 interface:

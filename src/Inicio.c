@@ -7,7 +7,12 @@ void main()
 	int i;
 	int *variavel;
 	int operacao;
+
+	int dbg;
+
 	Pilha* pilha = criaPilha();
+	system("clear");
+	printf("TAMANHO MAXIMO = %d\n", TAMANHO_MAXIMO);
 	printf("Digite o numero de operações \n");
 	scanf("%d", &num);
 	variavel = (int *) malloc(sizeof(int) * num);
@@ -20,13 +25,20 @@ void main()
 		if(operacao == 1)
 		{
 			printf("Isso foi uma inserção\n");
-			empilha(variavel[i], pilha);
+
+			dbg = empilha(variavel[i], pilha);
+			if(dbg == ESTRUTURA_CHEIA)
+			{
+				printf("Estrutura Cheia Detectada");
+			}
 			printf("empilhado : %d\n", variavel[i]);
 		}
 		else if(operacao == 2)
 		{
 			printf(" Isso foi uma remoção\n");
 			desempilha(pilha, &variavel[i]);
+			//DEBUGGER
+			printf("pilha->topo == %d\n", pilha->topo);
 			printf("Obtido -> %d\n", variavel[i]);
 		}
 		else
