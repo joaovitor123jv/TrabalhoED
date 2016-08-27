@@ -1,5 +1,6 @@
 #include"Definicoes.h"
 #include"Pilha.h"
+#include"Fila.h"
 
 void main()
 {
@@ -9,9 +10,10 @@ void main()
 	int operacao;
 
 	int dbg;
-
 	Pilha* pilha = criaPilha();
+	Fila* fila = criaFila();
 	system("clear");
+
 	printf("TAMANHO MAXIMO = %d\n", TAMANHO_MAXIMO);
 	printf("Digite o numero de operações \n");
 	scanf("%d", &num);
@@ -29,7 +31,12 @@ void main()
 			dbg = empilha(variavel[i], pilha);
 			if(dbg == ESTRUTURA_CHEIA)
 			{
-				printf("Estrutura Cheia Detectada");
+				printf("\t\tEstrutura Cheia Detectada\t[PILHA]\n");
+			}
+			dbg = addFila(variavel[i], fila);
+			if(dbg == ESTRUTURA_CHEIA)
+			{
+				printf("\t\tEstrutura Cheia Detectada\t[FILA]\n");
 			}
 			printf("empilhado : %d\n", variavel[i]);
 		}
@@ -47,6 +54,8 @@ void main()
 		}
 	}
 	mostraPilha(pilha);
+
+	destroiFila(fila);
 	destroiPilha(pilha);
 	if(variavel != NULL)
 	{

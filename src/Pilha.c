@@ -119,4 +119,5 @@ int mostraPilha(Pilha* pilha)
 		desempilha(pAux, &item);
 		empilha(item, pilha);
 	}
+	destroiPilha(pAux);
 }
