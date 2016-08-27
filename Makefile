@@ -2,6 +2,7 @@ CC=gcc
 FONTE=src/Inicio.c
 EXE=executavel
 PILHA=src/Pilha.c
+#OBJ=$(FONTE:.c=.o) $(PILHA:.c=.o)
 OBJ=Inicio.o Pilha.o
 WARNINGS=-Wunused-variable
 INICIO=src/Interface/Inicio.java
@@ -14,7 +15,7 @@ all: interface
 
 interface:
 	$(CC_JAVA) $(INICIO)
-	mv src/Interface/Inicio.class
+	mv src/Interface/Inicio.class ./
 
 run:
 	java Inicio
