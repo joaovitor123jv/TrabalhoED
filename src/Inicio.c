@@ -1,23 +1,83 @@
 #include"Definicoes.h"
 #include"Pilha.h"
 #include"Fila.h"
+void sair(Pilha* pilha, Fila* fila, int* variavel);
 
-void main()
+int main(int argc, char *argv[])
 {
+
+	int num = 0;
+	Pilha* pilha = criaPilha();
+	Fila* fila = criaFila();
+	FILE* arquivo;
+	int i;
+	int *variavel;
+	int operacao;
+	system("eject");
+	printf("\nPrograma aberto \n");
+
+	arquivo = fopen(argv[1], "r"); //Abre arquivo passado como parâtro como somente leitura
+
+	if(arquivo == NULL)//Tratamento de erros pra abertura de arquivo
+	{
+		printf("Arquivo não existe\n");
+		return NAO_FOI_POSSIVEL_ABRIR_ARQUIVO;
+	}
+
+	while(!feof(arquivo))
+	{
+		fscanf(arquivo, "%s\n", NULL);//só pra contar o tanto de linhas que esse arquivo tem
+		num++;
+	}
+
+	if(!(num >=0 && num <=100))//Se não cumprir a condição de ser um numero entre 0 e 1000 (está no exercício), envia sinal de erro
+	{
+		fclose(arquivo);
+		return ARGUMENTO_INVALIDO;
+	}
+
+//Fecha o arquivo e abre novamente pra apontar pro inicio do arquivo
+	fclose(arquivo);
+	arquivo = fopen(argv[1], "r");
+	variavel = (int *) malloc(sizeof(int) * num);//Alocação dinâmica num vetor, pra otimizar e economizar memória (pode trabalhar como um vetor normal)
+
+	for(i = 0; i<=num; i++)
+	{
+		fscanf(arquivo, "%d %d\n", &operacao, &variavel[i]);
+		if(operacao == 1)//inserção
+		{
+			empilha(variavel[i], pilha);
+			addFila(variavel[i], fila);
+		}
+		else if(operacao == 2)//remoção
+		{
+			desempilha(pilha, &variavel[i]);
+			rmFila(fila, &variavel[i]);
+		}
+		else	//Tratamento de erros
+		{
+			return ARGUMENTO_INVALIDO;
+		}
+	}
+
+	/*
 	int num;
 	int i;
 	int *variavel;
 	int operacao;
 
-	int dbg;
 	Pilha* pilha = criaPilha();
 	Fila* fila = criaFila();
 	system("clear");
-
-	printf("TAMANHO MAXIMO = %d\n", TAMANHO_MAXIMO);
 	printf("Digite o numero de operações \n");
 	scanf("%d", &num);
-	variavel = (int *) malloc(sizeof(int) * num);
+	if(!(num >=0 && num <=100))//Se não cumprir a condição de ser um numero entre 0 e 1000 (está no exercício), envia sinal de erro
+	{
+		return ARGUMENTO_INVALIDO;
+	}
+
+	variavel = (int *) malloc(sizeof(int) * num);//Alocação dinâmica num vetor, pra otimizar e economizar memória (pode trabalhar como um vetor normal)
+
 	for(i = 0; i<num; i++)
 	{
 		printf("Digite a operação (1 = inserção, 2 = remoção)\n");
@@ -26,38 +86,26 @@ void main()
 		scanf("%d", &variavel[i]);
 		if(operacao == 1)
 		{
-			printf("Isso foi uma inserção\n");
-
-			dbg = empilha(variavel[i], pilha);
-			if(dbg == ESTRUTURA_CHEIA)
-			{
-				printf("\t\tEstrutura Cheia Detectada\t[PILHA]\n");
-			}
-			dbg = addFila(variavel[i], fila);
-			if(dbg == ESTRUTURA_CHEIA)
-			{
-				printf("\t\tEstrutura Cheia Detectada\t[FILA]\n");
-			}
-			printf("empilhado : %d\n", variavel[i]);
-			mostraPilha(pilha);
+			empilha(variavel[i], pilha);
+			addFila(variavel[i], fila);
 		}
 		else if(operacao == 2)
 		{
-			printf(" Isso foi uma remoção\n");
-			//DEBUGGER
 			desempilha( pilha, &variavel[i]);
-			printf("\t\t\t\tdesempilhado : %d\n", variavel[i]);
 			rmFila(fila, &variavel[i]);
-			printf("\t\t\t\tRetirado da fila %d \n", variavel[i]);
-			mostraPilha(pilha);
 		}
 		else
 		{
 			printf("Operação não suportada\n");
 		}
 	}
-	mostraPilha(pilha);
+	sair(pilha, fila, variavel);//Tratamento de memory leak (vazamento de memória)
+	return OK; //Retorna que foi "tudo bem"
+	*/
+}
 
+void sair(Pilha* pilha, Fila* fila, int* variavel)
+{
 	destroiFila(fila);
 	destroiPilha(pilha);
 	if(variavel != NULL)

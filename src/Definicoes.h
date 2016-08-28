@@ -9,6 +9,13 @@
 #define false 0
 #define OK 0
 
+#define NAO_FOI_POSSIVEL_ABRIR_ARQUIVO -10
+#define FILA 5
+#define PILHA 6
+#define FILA_DE_PRIORIDADE 7
+#define IMPOSSIVEL 8
+#define INCERTO 9
+
 #ifdef __WIN32
 #define CLEAR system("cls");
 #define LIMPABUFFER fflush(stdin);

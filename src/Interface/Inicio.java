@@ -1,13 +1,17 @@
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import java.io.IOException; 
 
 
 public class Inicio extends JFrame implements ActionListener{
@@ -73,10 +77,20 @@ public class Inicio extends JFrame implements ActionListener{
 		public void actionPerformed(ActionEvent e) 
 		{
 			if(e.getSource()== btSair)
-				System.exit(1);
+				System.exit(0);
 			if(e.getSource()==btOk)
 			{
-				System.out.println(" FazNada");
+				String comando = "./executavel "+tfArquivo.getText();
+				System.out.println("Nome do arquivo = |"+comando+"|");
+				System.out.println("Chegou aqui sim");
+				try
+				{
+					System.out.println("Parte 1, OK");
+					Runtime run = Runtime.getRuntime();
+					run.exec(comando);
+					System.out.println("Parte 2, também");
+
+				}catch(IOException ex){}
 			}
 
 		}
