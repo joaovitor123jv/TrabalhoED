@@ -80,19 +80,46 @@ public class Inicio extends JFrame implements ActionListener{
 				System.exit(0);
 			if(e.getSource()==btOk)
 			{
-				String comando = "./executavel "+tfArquivo.getText();
-				System.out.println("Nome do arquivo = |"+comando+"|");
-				System.out.println("Chegou aqui sim");
-				try
+				int retorno;
+				retorno = botaoOkPressionado();
+				if(retorno == TipoRetorno.ERRO)
 				{
-					System.out.println("Parte 1, OK");
-					Runtime run = Runtime.getRuntime();
-					run.exec(comando);
-					System.out.println("Parte 2, também");
-
-				}catch(IOException ex){}
+					JOptionPane.showMessageDialog(null, "Ocorreu um erro durante o procesamento do arquivo\n");
+				}
+				else if(retorno == TipoRetorno.OK)
+				{
+					JOptionPane.showMessageDialog(null, "Arquivo testado com sucesso \n");
+				}
+				else if(retorno == TipoRetorno.ARQUIVO_NAO_EXISTE)
+				{
+					JOptionPane.showMessageDialog(null, "Arquivo não encontrado, verifique o nome do arquivo, arquivo está nessa pasta, ou tem permissão para abri-lo ? \n");
+				}
 			}
 
 		}
+
+	public int botaoOkPressionado()
+	{
+		String comando = "./executavel "+tfArquivo.getText();
+		System.out.println("Nome do arquivo = |"+comando+"|");
+		System.out.println("Chegou aqui sim");
+		try
+		{
+			System.out.println("Parte 1, OK");
+			Runtime run = Runtime.getRuntime();
+			Process processo = run.exec(comando);
+			try
+			{
+				processo.waitFor();
+			}catch(InterruptedException e){}
+			System.out.println("Parte 2, também");
+			int retorno;
+			retorno = processo.exitValue();
+			System.out.println("Retorno = "+retorno);
+			return retorno;
+
+		}catch(IOException ex){}
+		return TipoRetorno.ERRO;
+	}
 }
 

@@ -13,10 +13,11 @@ int main(int argc, char *argv[])
 	int i;
 	int *variavel;
 	int operacao;
-	system("eject");
+	//	system("eject");
 	printf("\nPrograma aberto \n");
 
-	arquivo = fopen(argv[1], "r"); //Abre arquivo passado como parâtro como somente leitura
+	arquivo = fopen(argv[1], "r+t"); //Abre arquivo passado como parâtro como somente leitura
+	printf("Tentou abrir o arquivo");
 
 	if(arquivo == NULL)//Tratamento de erros pra abertura de arquivo
 	{
@@ -24,14 +25,17 @@ int main(int argc, char *argv[])
 		return NAO_FOI_POSSIVEL_ABRIR_ARQUIVO;
 	}
 
+int lixo;
 	while(!feof(arquivo))
 	{
-		fscanf(arquivo, "%s\n", NULL);//só pra contar o tanto de linhas que esse arquivo tem
+		fscanf(arquivo, "%d %d\n", &lixo, &lixo);//só pra contar o tanto de linhas que esse arquivo tem
+		printf("Linha %d\n", num);
 		num++;
 	}
 
 	if(!(num >=0 && num <=100))//Se não cumprir a condição de ser um numero entre 0 e 1000 (está no exercício), envia sinal de erro
 	{
+		printf("Numero de linhas incorreto\n");
 		fclose(arquivo);
 		return ARGUMENTO_INVALIDO;
 	}
@@ -40,6 +44,8 @@ int main(int argc, char *argv[])
 	fclose(arquivo);
 	arquivo = fopen(argv[1], "r");
 	variavel = (int *) malloc(sizeof(int) * num);//Alocação dinâmica num vetor, pra otimizar e economizar memória (pode trabalhar como um vetor normal)
+
+	printf("Tudo certo até agora \n");
 
 	for(i = 0; i<=num; i++)
 	{
@@ -56,9 +62,12 @@ int main(int argc, char *argv[])
 		}
 		else	//Tratamento de erros
 		{
+			printf("Argumento invalido\n");
 			return ARGUMENTO_INVALIDO;
 		}
 	}
+	printf("Sem problemas \n");
+	return OK;
 
 	/*
 	int num;
