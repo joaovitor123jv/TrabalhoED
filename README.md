@@ -7,4 +7,4 @@ Arquivos fontes
 
 
 Para Rodar:
-	→make run (isso irá executar o "Inicio.class"[java], e quando apertar em "OK", ele vai abrir o arquivo e, como teste, coloquei pra abrir o slot de cd/dvd, então não se assuste kkkk)
+	→make run (isso irá executar o "Inicio.class"[java], e irá dar uma tela de retorno (ou Erro, ou OK, ou Arquivo não existe) ) 
