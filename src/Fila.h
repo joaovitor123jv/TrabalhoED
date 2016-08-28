@@ -7,6 +7,7 @@ typedef struct
 	ITEM itens[TAMANHO_MAXIMO];
 	int fim;
 	int inicio;
+	int tamanho;//Correção, debugger de fila circular
 }Fila;
 
 

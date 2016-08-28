@@ -12,8 +12,8 @@ void main()
 	int dbg;
 	Pilha* pilha = criaPilha();
 	Fila* fila = criaFila();
-	fila->inicio = 2;
-	fila->fim = 2;
+	fila->inicio = 0;
+	fila->fim = 0;
 	system("clear");
 
 	printf("TAMANHO MAXIMO = %d\n", TAMANHO_MAXIMO);
