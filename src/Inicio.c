@@ -36,7 +36,6 @@ void main()
 				printf("\t\tEstrutura Cheia Detectada\t[PILHA]\n");
 			}
 			dbg = addFila(variavel[i], fila);
-			printf("\t\t\t\t\t\t\t\t\t\tFIM  %d      INICIO   %d\n\n", fila->fim, fila->inicio);
 			if(dbg == ESTRUTURA_CHEIA)
 			{
 				printf("\t\tEstrutura Cheia Detectada\t[FILA]\n");
@@ -50,15 +49,15 @@ void main()
 			dbg = desempilha( pilha, &variavel[i]);
 			if(dbg == ESTRUTURA_VAZIA)
 			{
-				printf("\t\tEstrutura Cheia Detectada\t[PILHA]\n");
+				printf("\t\tEstrutura Vazia Detectada\t[PILHA]\n");
 			}
 			dbg = rmFila(fila, &variavel[i]);
-			printf("\t\t\t\t\t\t\t\t\t\tFIM  %d      INICIO   %d\n\n", fila->fim, fila->inicio);
+			printf("\t\t\t\tRetirado da fila %d \n", variavel[i]);
 			if(dbg == ESTRUTURA_VAZIA)
 			{
-				printf("\t\tEstrutura Cheia Detectada\t[FILA]\n");
+				printf("\t\tEstrutura Vazia Detectada\t[FILA]\n");
 			}
-			printf("empilhado : %d\n", variavel[i]);
+			printf("\t\t\t\tdesempilhado : %d\n", variavel[i]);
 		}
 		else
 		{

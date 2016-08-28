@@ -65,7 +65,7 @@ int addFila(ITEM item, Fila* fila)
 		return ESTRUTURA_CHEIA;
 	}
 	fila->itens[fila->fim] = item;
-	if( fila->fim+1 >= TAMANHO_MAXIMO)
+	if( fila->fim+1 == TAMANHO_MAXIMO)
 	{
 		fila->fim = 0;
 	}
@@ -77,7 +77,6 @@ int addFila(ITEM item, Fila* fila)
 	return OK;
 }
 
-//SEM ERROS ATÉ AQUI
 
 int rmFila(Fila* fila, ITEM* item)
 {
@@ -90,11 +89,16 @@ int rmFila(Fila* fila, ITEM* item)
 		return ESTRUTURA_VAZIA;
 	}
 	*item = fila->itens[fila->inicio];
-	fila->inicio++;
-	if(fila->inicio >= TAMANHO_MAXIMO)
+	if(fila->inicio+1 == TAMANHO_MAXIMO)
 	{
 		fila->inicio = 0;
 	}
-	fila->tamanho=0;
+	else
+	{
+		fila->inicio++;
+	}
+	fila->tamanho--;
 	return OK;
 }
+
+//SEM ERROS ATÉ AQUI
