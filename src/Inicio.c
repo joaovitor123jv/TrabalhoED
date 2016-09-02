@@ -1,7 +1,9 @@
 #include"Definicoes.h"
 #include"Pilha.h"
 #include"Fila.h"
-void sair(Pilha* pilha, Fila* fila, int* variavel);
+#include "Lista.h"
+void sair(Pilha* pilha, Fila* fila, Lista* lista, int* variavel);
+int comparaSaidas(Pilha* pilha, Fila* fila, Lista* lista, int elemento);
 
 int main(int argc, char *argv[])
 {
@@ -9,11 +11,13 @@ int main(int argc, char *argv[])
 	int num = 0;
 	Pilha* pilha = criaPilha();
 	Fila* fila = criaFila();
+	Lista* lista = criaLista();
 	FILE* arquivo;
 	int i;
 	int *variavel;
 	int operacao;
-	//	system("eject");
+	int retorno;
+	int lixo;
 	printf("\nPrograma aberto \n");
 
 	arquivo = fopen(argv[1], "r+t"); //Abre arquivo passado como parâtro como somente leitura
@@ -25,7 +29,6 @@ int main(int argc, char *argv[])
 		return NAO_FOI_POSSIVEL_ABRIR_ARQUIVO;
 	}
 
-int lixo;
 	while(!feof(arquivo))
 	{
 		fscanf(arquivo, "%d %d\n", &lixo, &lixo);//só pra contar o tanto de linhas que esse arquivo tem
@@ -33,7 +36,7 @@ int lixo;
 		num++;
 	}
 
-	if(!(num >=0 && num <=100))//Se não cumprir a condição de ser um numero entre 0 e 1000 (está no exercício), envia sinal de erro
+	if(!(num >=0 && num <=1000))//Se não cumprir a condição de ser um numero entre 0 e 1000 (está no exercício), envia sinal de erro
 	{
 		printf("Numero de linhas incorreto\n");
 		fclose(arquivo);
@@ -54,11 +57,15 @@ int lixo;
 		{
 			empilha(variavel[i], pilha);
 			addFila(variavel[i], fila);
+			addLista(lista, variavel[i], i);
 		}
 		else if(operacao == 2)//remoção
 		{
-			desempilha(pilha, &variavel[i]);
-			rmFila(fila, &variavel[i]);
+			retorno = comparaSaidas(pilha, fila, lista, variavel[i]);
+			if(retorno == IMPOSSIVEL || retorno == FILA || retorno == PILHA || retorno == LISTA)
+			{
+				return retorno;
+			}
 		}
 		else	//Tratamento de erros
 		{
@@ -67,59 +74,57 @@ int lixo;
 		}
 	}
 	printf("Sem problemas \n");
-	return OK;
-
-	/*
-	int num;
-	int i;
-	int *variavel;
-	int operacao;
-
-	Pilha* pilha = criaPilha();
-	Fila* fila = criaFila();
-	system("clear");
-	printf("Digite o numero de operações \n");
-	scanf("%d", &num);
-	if(!(num >=0 && num <=100))//Se não cumprir a condição de ser um numero entre 0 e 1000 (está no exercício), envia sinal de erro
-	{
-		return ARGUMENTO_INVALIDO;
-	}
-
-	variavel = (int *) malloc(sizeof(int) * num);//Alocação dinâmica num vetor, pra otimizar e economizar memória (pode trabalhar como um vetor normal)
-
-	for(i = 0; i<num; i++)
-	{
-		printf("Digite a operação (1 = inserção, 2 = remoção)\n");
-		scanf("%d", &operacao);
-		printf("Digite o elemento a ser inserido/removido\n");
-		scanf("%d", &variavel[i]);
-		if(operacao == 1)
-		{
-			empilha(variavel[i], pilha);
-			addFila(variavel[i], fila);
-		}
-		else if(operacao == 2)
-		{
-			desempilha( pilha, &variavel[i]);
-			rmFila(fila, &variavel[i]);
-		}
-		else
-		{
-			printf("Operação não suportada\n");
-		}
-	}
-	sair(pilha, fila, variavel);//Tratamento de memory leak (vazamento de memória)
-	return OK; //Retorna que foi "tudo bem"
-	*/
+	return INCERTO;
 }
 
-void sair(Pilha* pilha, Fila* fila, int* variavel)
+void sair(Pilha* pilha, Fila* fila, Lista* lista,int* variavel)
 {
 	destroiFila(fila);
 	destroiPilha(pilha);
+	liberaLista(lista);
 	if(variavel != NULL)
 	{
 		free(variavel);
 		variavel = NULL;
 	}
 }
+
+
+int comparaSaidas(Pilha* pilha, Fila* fila, Lista* lista, int elemento ){
+
+int rtPilha, rtFila, rtLista;
+
+
+rmFila(fila, &rtFila);
+desempilha(pilha, &rtPilha);
+rmLista(lista, &rtLista, lista->ultimo);
+
+if((rtFila == elemento)||(rtPilha == elemento)||(rtLista == elemento)){
+
+	if((rtFila == elemento)&&(rtPilha != elemento)&&(rtLista != elemento))
+	{
+		return FILA;
+	}
+
+	if((rtFila != elemento)&&(rtPilha == elemento)&&(rtLista != elemento))
+	{
+		return PILHA;
+	}
+
+	if((rtFila != elemento)&&(rtPilha != elemento)&&(rtLista != elemento))
+	{
+		return LISTA;
+	}
+
+return INCERTO;
+
+}
+
+if((rtFila != elemento)&&(rtPilha != elemento)&&(rtLista != elemento))
+{
+
+	return IMPOSSIVEL;
+
+}
+}
+

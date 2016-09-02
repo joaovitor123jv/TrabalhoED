@@ -12,8 +12,9 @@ typedef struct
 
 
 Fila* criaFila();
-int destroiFila(Fila* fila);
+int destroiFila(Fila* fila);//libera a fila
 int filaVazia(Fila* fila);
 int filaCheia(Fila* fila);
-int addFila(ITEM item, Fila* fila);
-int rmFila(Fila* fila, ITEM* item);
+int addFila(ITEM item, Fila* fila);//insere elemento na fila
+int rmFila(Fila* fila, ITEM* item);//remove elemento da fila
+

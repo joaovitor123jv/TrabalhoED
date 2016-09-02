@@ -12,7 +12,7 @@
 #define NAO_FOI_POSSIVEL_ABRIR_ARQUIVO -10
 #define FILA 5
 #define PILHA 6
-#define FILA_DE_PRIORIDADE 7
+#define LISTA 7
 #define IMPOSSIVEL 8
 #define INCERTO 9
 
