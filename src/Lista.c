@@ -23,39 +23,40 @@ int listaCheia(Lista* lista) {
     if (lista == NULL)
         return ESTRUTURA_NAO_INICIALIZADA;
     if (lista->ultimo == TAM_MAX)
-        return TRUE;
-    return FALSE;
+        return true;
+    return false;
 }
 
 int listaVazia(Lista* lista) {
     if (lista == NULL)
         return ESTRUTURA_NAO_INICIALIZADA;
     if (lista->ultimo == 0)
-        return TRUE;
-    return FALSE;
+        return true;
+    return false;
 }
 
 int verificaIndice(Lista* lista, int pos, int incluiUltimo) {
     if (pos < 0)
-        return FALSE;
+        return false;
     if ((incluiUltimo) && (pos > lista->ultimo))
-        return FALSE;
+        return false;
     if ((!incluiUltimo) && (pos >= lista->ultimo))
-        return FALSE;
-    return TRUE;
+        return false;
+    return true;
 }
 
 int addLista(Lista* lista, int item, int pos) {
    int aux;
+	int i;
     if (lista == NULL)
         return ESTRUTURA_NAO_INICIALIZADA;
-    if (listaCheial(lista))
+    if (listaCheia(lista))
         return ESTRUTURA_CHEIA;
-    if (!verificaIndice(lista, pos, TRUE))
+    if (!verificaIndice(lista, pos, true))
         return INDICE_INVALIDO;
 
     // Desloca elementos para a direita.
-    for(int i = lista->ultimo; i > pos; i--)  {
+    for(i = lista->ultimo; i > pos; i--)  {
         lista->itens[i] = lista->itens[i - 1];
     }
     lista->itens[pos] = item;
@@ -71,7 +72,7 @@ int rmLista(Lista* lista, int* item, int pos) {
         return ESTRUTURA_NAO_INICIALIZADA;
     if (listaVazia(lista))
         return ESTRUTURA_VAZIA;
-    if (!verificaIndice(lista, pos, FALSE))
+    if (!verificaIndice(lista, pos, false))
         return INDICE_INVALIDO;
 
     if (item != NULL)
@@ -88,9 +89,9 @@ int rmLista(Lista* lista, int* item, int pos) {
 int getElemento(Lista* lista, int* item, int pos) {
     if (lista == NULL)
         return ESTRUTURA_NAO_INICIALIZADA;
-    if (listaVazial(lista))
+    if (listaVazia(lista))
         return ESTRUTURA_VAZIA;
-    if (!verificaIndice(lista, pos, FALSE))
+    if (!verificaIndice(lista, pos, false))
         return INDICE_INVALIDO;
     if (item == NULL)
         return PARAMETRO_INVALIDO;

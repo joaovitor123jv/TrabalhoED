@@ -9,6 +9,9 @@ int main(int argc, char *argv[])
 {
 
 	int num = 0;
+	char ePilha = true;
+	char eFila = true;
+	char eLista = true;
 	Pilha* pilha = criaPilha();
 	Fila* fila = criaFila();
 	Lista* lista = criaLista();
@@ -64,7 +67,32 @@ int main(int argc, char *argv[])
 			retorno = comparaSaidas(pilha, fila, lista, variavel[i]);
 			if(retorno == IMPOSSIVEL || retorno == FILA || retorno == PILHA || retorno == LISTA)
 			{
-				return retorno;
+				if(retorno == FILA && eFila)
+				{
+					eLista = false;
+					ePilha = false;
+					eFila = true;
+				}
+				if(retorno == PILHA && eFila)
+				{
+					eLista = false;
+					eFila = false;
+					ePilha = true;
+				}
+				if(retorno == LISTA && eLista)
+				{
+					eFila = false;
+					ePilha = false;
+					eLista == true;
+				}
+				if(!eFila && !eLista && !ePilha)
+				{
+					return IMPOSSIVEL;
+				}
+				if(retorno == IMPOSSIVEL)
+				{
+					return retorno;
+				}
 			}
 		}
 		else	//Tratamento de erros

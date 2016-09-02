@@ -82,17 +82,25 @@ public class Inicio extends JFrame implements ActionListener{
 			{
 				int retorno;
 				retorno = botaoOkPressionado();
-				if(retorno == TipoRetorno.ERRO)
+				if(retorno == TipoRetorno.IMPOSSIVEL)
 				{
-					JOptionPane.showMessageDialog(null, "Ocorreu um erro durante o procesamento do arquivo\n");
+					JOptionPane.showMessageDialog(null, "Esse é o exemplo de uma estrutura Impossível, ou não reconhecida\n");
 				}
 				else if(retorno == TipoRetorno.OK)
 				{
-					JOptionPane.showMessageDialog(null, "Arquivo testado com sucesso \n");
+					JOptionPane.showMessageDialog(null, "Arquivo testado com sucesso \n Não foi identificado o tipo da pilha\n");
 				}
 				else if(retorno == TipoRetorno.ARQUIVO_NAO_EXISTE)
 				{
 					JOptionPane.showMessageDialog(null, "Arquivo não encontrado, verifique o nome do arquivo, arquivo está nessa pasta, ou tem permissão para abri-lo ? \n");
+				}
+				else if(retorno == TipoRetorno.PILHA)
+				{
+					JOptionPane.showMessageDialog(null, "Esse é o exemplo de uma Pilha");
+				}
+				else if(retorno == TipoRetorno.FILA)
+				{
+					JOptionPane.showMessageDialog(null, "Esse é o exemplo de uma Fila");
 				}
 			}
 
@@ -119,7 +127,7 @@ public class Inicio extends JFrame implements ActionListener{
 			return retorno;
 
 		}catch(IOException ex){}
-		return TipoRetorno.ERRO;
+		return TipoRetorno.IMPOSSIVEL;
 	}
 }
 

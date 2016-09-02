@@ -14,8 +14,8 @@ all: interface
 
 interface:
 	$(CC_JAVA) $(CODIGOS_JAVA)
-	$(CC_JAVA) $(INICIO)
 	mv $(CODIGOS_JAVA:.java=.class) ./
+	$(CC_JAVA) $(INICIO)
 	mv src/Interface/Inicio.class ./
 
 run:
