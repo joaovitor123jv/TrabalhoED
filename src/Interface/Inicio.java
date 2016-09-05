@@ -84,11 +84,11 @@ public class Inicio extends JFrame implements ActionListener{
 				retorno = botaoOkPressionado();
 				if(retorno == TipoRetorno.IMPOSSIVEL)
 				{
-					JOptionPane.showMessageDialog(null, "Esse é o exemplo de uma estrutura Impossível, ou não reconhecida\n");
+					JOptionPane.showMessageDialog(null, "Não foi possível detectar o tipo de estrutura, ou estrutura Impossível");
 				}
 				else if(retorno == TipoRetorno.OK)
 				{
-					JOptionPane.showMessageDialog(null, "Arquivo testado com sucesso \n Não foi identificado o tipo da pilha\n");
+					JOptionPane.showMessageDialog(null, "Arquivo testado com sucesso \n Não foi identificado o tipo da estrutura\n");
 				}
 				else if(retorno == TipoRetorno.ARQUIVO_NAO_EXISTE)
 				{
@@ -96,11 +96,23 @@ public class Inicio extends JFrame implements ActionListener{
 				}
 				else if(retorno == TipoRetorno.PILHA)
 				{
-					JOptionPane.showMessageDialog(null, "Esse é o exemplo de uma Pilha");
+					JOptionPane.showMessageDialog(null, "Estrutura do tipo PILHA");
 				}
 				else if(retorno == TipoRetorno.FILA)
 				{
-					JOptionPane.showMessageDialog(null, "Esse é o exemplo de uma Fila");
+					JOptionPane.showMessageDialog(null, "Estrutura do tipo FILA");
+				}
+				else if(retorno == TipoRetorno.FILA_DE_PRIORIDADES)
+				{
+					JOptionPane.showMessageDialog(null, "Estrutura do tipo FILA DE PRIORIDADES");
+				}
+				else if(retorno == TipoRetorno.INCERTO)
+				{
+					JOptionPane.showMessageDialog(null, "Esse exemplo pode ser mais de uma estrutura (NOT SURE)\n");
+				}
+				else if(retorno == TipoRetorno.NAO_FOI_POSSIVEL_ABRIR_ARQUIVO)
+				{
+					JOptionPane.showMessageDialog(null, "Erro, não foi possível abrir o arquivo\nVerifique o nome e tente novamente");
 				}
 			}
 

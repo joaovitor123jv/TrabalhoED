@@ -1,5 +1,5 @@
 CC=gcc
-FONTE=Inicio.c Pilha.c Fila.c Lista.c
+FONTE=main.c Sacola.c 
 EXE=executavel
 OBJ=$(FONTE:.c=.o)
 WARNINGS=-Wunused-variable
